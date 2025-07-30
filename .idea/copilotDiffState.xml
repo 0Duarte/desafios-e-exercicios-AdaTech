@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/src/Main.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/Main.java" />
+              <option name="originalContent" value="public class Main {&#10;    public static void main(String[] args) {&#10;        System.out.println(&quot;Hello, World!&quot;);&#10;    }&#10;}" />
+              <option name="updatedContent" value="public class Main {&#10;    public static void main(String[] args) {&#10;        System.out.println(&quot;Hello, World!&quot;);&#10;&#10;        // Teste da classe Produto&#10;        Produto p1 = new Produto(&quot;Mouse&quot;, 59.90, 10);&#10;        Produto p2 = new Produto(&quot;Teclado&quot;, 129.90);&#10;&#10;        p1.exibirResumo();&#10;        System.out.println(&quot;---&quot;);&#10;        p2.exibirResumo();&#10;        System.out.println(&quot;Adicionando 5 ao estoque do teclado...&quot;);&#10;        p2.adicionarEstoque(5);&#10;        p2.exibirResumo();&#10;        System.out.println(&quot;Vendendo 3 mouses...&quot;);&#10;        boolean venda = p1.vender(3);&#10;        System.out.println(&quot;Venda realizada? &quot; + venda);&#10;        p1.exibirResumo();&#10;        System.out.println(&quot;Tentando vender 20 teclados...&quot;);&#10;        boolean venda2 = p2.vender(20);&#10;        System.out.println(&quot;Venda realizada? &quot; + venda2);&#10;        p2.exibirResumo();&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/Produto.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/Produto.java" />
+              <option name="updatedContent" value="public class Produto {&#10;    private String nome;&#10;    private double preco;&#10;    private int estoque;&#10;&#10;    // Construtor que define todos os atributos&#10;    public Produto(String nome, double preco, int estoque) {&#10;        this.nome = nome;&#10;        this.preco = preco;&#10;        this.estoque = estoque;&#10;    }&#10;&#10;    // Construtor que define apenas nome e preco, estoque inicial = 0&#10;    public Produto(String nome, double preco) {&#10;        this(nome, preco, 0);&#10;    }&#10;&#10;    // Método para adicionar ao estoque&#10;    public void adicionarEstoque(int quantidade) {&#10;        if (quantidade &gt; 0) {&#10;            this.estoque += quantidade;&#10;        }&#10;    }&#10;&#10;    // Método para vender produtos&#10;    public boolean vender(int quantidade) {&#10;        if (quantidade &gt; 0 &amp;&amp; this.estoque &gt;= quantidade) {&#10;            this.estoque -= quantidade;&#10;            return true;&#10;        }&#10;        return false;&#10;    }&#10;&#10;    // Método para exibir resumo do produto&#10;    public void exibirResumo() {&#10;        System.out.println(&quot;Produto: &quot; + nome);&#10;        System.out.println(&quot;Preço: R$ &quot; + preco);&#10;        System.out.println(&quot;Estoque: &quot; + estoque);&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

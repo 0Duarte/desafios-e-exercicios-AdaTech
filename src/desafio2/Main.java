@@ -1,6 +1,6 @@
 package desafio2;
 
-public class MainDesafio2 {
+public class Main {
     public static void main(String[] args) {
         // Funcionário 1, menos de 7 dias
         Reembolso r1 = new Reembolso("Carla", 5);

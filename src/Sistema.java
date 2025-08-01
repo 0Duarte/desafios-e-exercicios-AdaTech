@@ -1,10 +1,10 @@
-public class Main {
+public class Sistema {
     public static void main(String[] args) {
         Administrador admin = new Administrador("Maria", "maria@email.com", "senha1234");
 
-        System.out.println("Acesso direto ao nome: " + admin.nome); // acessivel
-        System.out.println("22222: " + admin.email); // acessivel
-        //System.out.println(admin.senha); // nao acessível
+        System.out.println("Acesso direto ao nome: " + admin.nome); // acessível
+        System.out.println("Acesso direto ao nom2222e: " +admin.email); // acessível
+        // System.out.println(admin.senha); // nao acessível
 
         admin.exibirUsuario();
         System.out.println("Autenticação correta: " + admin.autenticar("senha1234"));
@@ -18,3 +18,4 @@ public class Main {
         System.out.println("Senha forte? 'forte2025!': " + SegurancaUtils.validarSenhaForte("forte2025!"));
     }
 }
+

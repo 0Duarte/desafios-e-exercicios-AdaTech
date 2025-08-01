@@ -3,6 +3,15 @@
   <component name="CopilotDiffPersistence">
     <option name="pendingDiffs">
       <map>
+        <entry key="$PROJECT_DIR$/src/Administrador.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/Administrador.java" />
+              <option name="originalContent" value="public class Administrador extends Usuario {&#10;    public Administrador(String nome, String email, String senha) {&#10;        super(nome, email, senha);&#10;    }&#10;&#10;    @Override&#10;    public boolean autenticar(String senha) {&#10;        // Não é possível acessar senha diretamente, então precisamos de um método para comparar&#10;        // Como senha é private, normalmente teríamos um getter protegido, mas para o desafio, vamos comparar via equals&#10;        return this.senhaEquals(senha);&#10;    }&#10;&#10;    private boolean senhaEquals(String senha) {&#10;        // Acesso ao atributo senha da superclasse&#10;        try {&#10;            java.lang.reflect.Field field = Usuario.class.getDeclaredField(&quot;senha&quot;);&#10;            field.setAccessible(true);&#10;            String senhaReal = (String) field.get(this);&#10;            return senhaReal.equals(senha);&#10;        } catch (Exception e) {&#10;            return false;&#10;        }&#10;    }&#10;&#10;    public void redefinirSenha(String novaSenha) {&#10;        try {&#10;            java.lang.reflect.Field field = Usuario.class.getDeclaredField(&quot;senha&quot;);&#10;            field.setAccessible(true);&#10;            field.set(this, novaSenha);&#10;        } catch (Exception e) {&#10;            System.out.println(&quot;Erro ao redefinir senha.&quot;);&#10;        }&#10;    }&#10;}&#10;&#10;" />
+              <option name="updatedContent" value="public class Administrador extends Usuario {&#10;    public Administrador(String nome, String email, String senha) {&#10;        super(nome, email, senha);&#10;    }&#10;&#10;    @Override&#10;    public boolean autenticar(String senha) {&#10;        return getSenha().equals(senha);&#10;    }&#10;&#10;    public void redefinirSenha(String novaSenha) {&#10;        setSenha(novaSenha);&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/Main.java">
           <value>
             <PendingDiffInfo>
@@ -17,6 +26,39 @@
             <PendingDiffInfo>
               <option name="filePath" value="$PROJECT_DIR$/src/Produto.java" />
               <option name="updatedContent" value="public class Produto {&#10;    private String nome;&#10;    private double preco;&#10;    private int estoque;&#10;&#10;    // Construtor que define todos os atributos&#10;    public Produto(String nome, double preco, int estoque) {&#10;        this.nome = nome;&#10;        this.preco = preco;&#10;        this.estoque = estoque;&#10;    }&#10;&#10;    // Construtor que define apenas nome e preco, estoque inicial = 0&#10;    public Produto(String nome, double preco) {&#10;        this(nome, preco, 0);&#10;    }&#10;&#10;    // Método para adicionar ao estoque&#10;    public void adicionarEstoque(int quantidade) {&#10;        if (quantidade &gt; 0) {&#10;            this.estoque += quantidade;&#10;        }&#10;    }&#10;&#10;    // Método para vender produtos&#10;    public boolean vender(int quantidade) {&#10;        if (quantidade &gt; 0 &amp;&amp; this.estoque &gt;= quantidade) {&#10;            this.estoque -= quantidade;&#10;            return true;&#10;        }&#10;        return false;&#10;    }&#10;&#10;    // Método para exibir resumo do produto&#10;    public void exibirResumo() {&#10;        System.out.println(&quot;Produto: &quot; + nome);&#10;        System.out.println(&quot;Preço: R$ &quot; + preco);&#10;        System.out.println(&quot;Estoque: &quot; + estoque);&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/SegurancaUtils.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/SegurancaUtils.java" />
+              <option name="updatedContent" value="public class SegurancaUtils {&#10;    public static boolean validarSenhaForte(String senha) {&#10;        if (senha == null || senha.length() &lt;= 8) return false;&#10;        boolean temNumero = false;&#10;        for (char c : senha.toCharArray()) {&#10;            if (Character.isDigit(c)) {&#10;                temNumero = true;&#10;                break;&#10;            }&#10;        }&#10;        return temNumero;&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/Sistema.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/Sistema.java" />
+              <option name="updatedContent" value="public class Sistema {&#10;    public static void main(String[] args) {&#10;        Administrador admin = new Administrador(&quot;Maria&quot;, &quot;maria@email.com&quot;, &quot;senha1234&quot;);&#10;&#10;        // Teste de acesso direto aos atributos&#10;        System.out.println(&quot;Acesso direto ao nome: &quot; + admin.nome); // acessível&#10;        // System.out.println(admin.email); // ERRO: protected se estiver em outro pacote&#10;        // System.out.println(admin.senha); // ERRO: private&#10;&#10;        // Teste de métodos&#10;        admin.exibirUsuario();&#10;        System.out.println(&quot;Autenticação correta: &quot; + admin.autenticar(&quot;senha1234&quot;));&#10;        System.out.println(&quot;Autenticação incorreta: &quot; + admin.autenticar(&quot;errada&quot;));&#10;&#10;        admin.redefinirSenha(&quot;novaSenha2025&quot;);&#10;        System.out.println(&quot;Autenticação nova senha: &quot; + admin.autenticar(&quot;novaSenha2025&quot;));&#10;&#10;        // Teste utilitário&#10;        System.out.println(&quot;Senha forte? '12345678': &quot; + SegurancaUtils.validarSenhaForte(&quot;12345678&quot;));&#10;        System.out.println(&quot;Senha forte? 'senha1234': &quot; + SegurancaUtils.validarSenhaForte(&quot;senha1234&quot;));&#10;        System.out.println(&quot;Senha forte? 'forte2025!': &quot; + SegurancaUtils.validarSenhaForte(&quot;forte2025!&quot;));&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/Usuario.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/Usuario.java" />
+              <option name="originalContent" value="public abstract class Usuario {&#10;    private String senha;&#10;    protected String email;&#10;    public String nome;&#10;&#10;    public Usuario(String nome, String email, String senha) {&#10;        this.nome = nome;&#10;        this.email = email;&#10;        this.senha = senha;&#10;    }&#10;&#10;    public abstract boolean autenticar(String senha);&#10;&#10;    public final void exibirUsuario() {&#10;        System.out.println(&quot;Nome: &quot; + nome + &quot; | Email: &quot; + email);&#10;    }&#10;}&#10;&#10;" />
+              <option name="updatedContent" value="public abstract class Usuario {&#10;    private String senha;&#10;    protected String email;&#10;    public String nome;&#10;&#10;    public Usuario(String nome, String email, String senha) {&#10;        this.nome = nome;&#10;        this.email = email;&#10;        this.senha = senha;&#10;    }&#10;&#10;    public abstract boolean autenticar(String senha);&#10;&#10;    public final void exibirUsuario() {&#10;        System.out.println(&quot;Nome: &quot; + nome + &quot; | Email: &quot; + email);&#10;    }&#10;&#10;    public String getSenha() {&#10;        return senha;&#10;    }&#10;&#10;    public void setSenha(String senha) {&#10;        this.senha = senha;&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/desafio2/MainDesafio2.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/desafio2/MainDesafio2.java" />
+              <option name="updatedContent" value="package desafio2;&#10;&#10;public class MainDesafio2 {&#10;    public static void main(String[] args) {&#10;        // Funcionário 1: menos de 7 dias&#10;        Reembolso r1 = new Reembolso(&quot;Carla&quot;, 5);&#10;        double total1 = r1.calcularReembolso(150.0, 100.0, 135.0);&#10;        r1.imprimirResumoReembolso(total1);&#10;&#10;        // Funcionário 2: mais de 7 dias, com hospedagem&#10;        Reembolso r2 = new Reembolso(&quot;João&quot;, 10);&#10;        double total2 = r2.calcularReembolso(200.0, 120.0, 180.0);&#10;        r2.imprimirResumoReembolso(total2);&#10;&#10;        // Funcionário 3: mais de 7 dias, sem hospedagem&#10;        Reembolso r3 = new Reembolso(&quot;Ana&quot;, 8);&#10;        double total3 = r3.calcularReembolso(180.0, 90.0);&#10;        r3.imprimirResumoReembolso(total3);&#10;    }&#10;}&#10;" />
             </PendingDiffInfo>
           </value>
         </entry>

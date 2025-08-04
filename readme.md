@@ -1,14 +1,18 @@
-Desafio
-Tema: Sistema de Cadastro de Produtos
+Criar um mini sistema de movimentação bancária
+Requisitos:
+Criar uma Conta com titular, número e saldo.
 
-Descrição:
-Crie a classe Produto com:
-Atributos: nome, preco, estoque (quantidade)
+Mostrar menu de operações no console:
+Depositar
+Sacar
+Transferir
+Pagar
+Sair
 
-Dois construtores:
-Um que define todos os atributos
-Um que define apenas nome e preco, com estoque inicial = 0
-Método adicionarEstoque(int quantidade)
-Método vender(int quantidade) que só permite venda se houver estoque
-Método exibirResumo()
+Regras:
 
+Cada operação cobra uma taxa de R$0.50
+Não permitir saldo negativo
+Mostrar o saldo após cada operação
+
+Dica: use Scanner para interações e while para o menu.
